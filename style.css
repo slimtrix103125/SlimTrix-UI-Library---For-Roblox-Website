@@ -1,741 +1,155 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlimTrix UI Library</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-            color: #e0e0e0;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #191927, #252540);
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid #2a2a4a;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            background: linear-gradient(90deg, #ff4a4a, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(255, 74, 74, 0.3);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: #b0b0d0;
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: linear-gradient(145deg, #1e1e2e, #252538);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid #2d2d4a;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            color: #ff4a4a;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #2d2d4a;
-            font-weight: 600;
-        }
-
-        .card-content {
-            line-height: 1.6;
-            color: #c0c0e0;
-        }
-
-        .card-content pre {
-            background: #0f0f1a;
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin-top: 10px;
-            border: 1px solid #2a2a4a;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 25px;
-            background: linear-gradient(135deg, #191927, #252540);
-            border-radius: 15px;
-            margin-top: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid #2a2a4a;
-            color: #b0b0d0;
-            font-size: 0.95rem;
-        }
-
-        code {
-            background: #2a2a4a;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #8bc34a;
-        }
-
-        .highlight {
-            color: #ff6b6b;
-            font-weight: 600;
-        }
-
-        .features-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .feature-badge {
-            background: #2a2a4a;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #8bc34a;
-            border: 1px solid #3a3a5a;
-        }
-
-        .usage-section {
-            background: #1e1e2e;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #ff4a4a;
-        }
-
-        .usage-section h3 {
-            color: #ff4a4a;
-            margin-bottom: 10px;
-        }
-
-        .version-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff4a4a;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .header {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="version-badge">v1.0</div>
-            <h1>SlimTrix UI Library - For Roblox</h1>
-            <p>SlimTrix Ui Library is a gui Library for roblox exploits</p>
-            <div class="features-list">
-                <span class="feature-badge">Sleek Design</span>
-                <span class="feature-badge">Customizable</span>
-                <span class="feature-badge">Smooth Animations</span>
-                <span class="feature-badge">Notification System</span>
-                <span class="feature-badge">Player Selector</span>
-                <span class="feature-badge">Color Picker</span>
-                <span class="feature-badge">Keybind Support</span>
-                <span class="feature-badge">Image/Video Display</span>
-            </div>
-        </div>
-
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-title">Creating a Window</div>
-                <div class="card-content">
-                    Start by creating the main window using <code>SlimTrix:CreateWindow()</code>.
-                    <pre>local Window = SlimTrix:CreateWindow({
-    Name = "Your UI Name",
-    Icon = "rbxassetid://18820555586",
-    AccentColor3 = Color3.fromRGB(255, 0, 0)
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Creating Tabs</div>
-                <div class="card-content">
-                    Add tabs to organize your UI using <code>Window:CreateTab()</code>.
-                    <pre>local MainTab = Window:CreateTab({
-    Name = "Main",
-    Icon = "rbxassetid://7733800044"
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Text Elements</div>
-                <div class="card-content">
-                    Create simple text displays with <code>Tab:CreateText()</code>.
-                    <pre>MainTab:CreateText({
-    Text = "Welcome!",
-    TextSize = 18,
-    TextColor = Color3.fromRGB(220, 220, 220)
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Labels</div>
-                <div class="card-content">
-                    Create labels with copy functionality using <code>Tab:CreateLabel()</code>.
-                    <pre>MainTab:CreateLabel({
-    Text = "Player Info",
-    TextSize = 16,
-    TextColor = Color3.fromRGB(180, 180, 180)
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Buttons</div>
-                <div class="card-content">
-                    Add interactive buttons with <code>Tab:CreateButton()</code>.
-                    <pre>MainTab:CreateButton({
-    Text = "Click Me",
-    Callback = function()
-        print("Button clicked!")
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Toggles</div>
-                <div class="card-content">
-                    Create toggle switches with <code>Tab:CreateToggle()</code>.
-                    <pre>MainTab:CreateToggle({
-    Text = "Enable Feature",
-    Default = false,
-    Callback = function(Value)
-        print("Toggle:", Value)
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Sliders</div>
-                <div class="card-content">
-                    Add value sliders with <code>Tab:CreateSlider()</code>.
-                    <pre>MainTab:CreateSlider({
-    Text = "Volume",
-    Minimum = 0,
-    Maximum = 100,
-    Default = 50,
-    Callback = function(Value)
-        print("Volume:", Value)
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Dropdowns</div>
-                <div class="card-content">
-                    Create dropdown menus with <code>Tab:CreateDropdown()</code>.
-                    <pre>MainTab:CreateDropdown({
-    Text = "Select Option",
-    Options = {"Option 1", "Option 2", "Option 3"},
-    Default = "Option 1",
-    Callback = function(Selected)
-        print("Selected:", Selected)
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Player Selector</div>
-                <div class="card-content">
-                    Add player selection with <code>Tab:CreatePlayerSelector()</code>.
-                    <pre>MainTab:CreatePlayerSelector({
-    Text = "Select Player",
-    Callback = function(SelectedPlayer)
-        if SelectedPlayer then
-            print("Selected:", SelectedPlayer.Name)
-        end
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Color Picker</div>
-                <div class="card-content">
-                    Add color selection with <code>Tab:CreateColorPicker()</code>.
-                    <pre>MainTab:CreateColorPicker({
-    Text = "Pick Color",
-    Default = Color3.fromRGB(255, 0, 0),
-    Callback = function(SelectedColor)
-        print("Color:", SelectedColor)
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Keybinds</div>
-                <div class="card-content">
-                    Create keybind inputs with <code>Tab:CreateBind()</code>.
-                    <pre>MainTab:CreateBind({
-    Text = "Toggle Key",
-    Default = Enum.KeyCode.F,
-    Hold = false,
-    CallBack = function()
-        print("Key pressed!")
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Text Boxes</div>
-                <div class="card-content">
-                    Add text input fields with <code>Tab:CreateBox()</code>.
-                    <pre>MainTab:CreateBox({
-    Text = "Enter Text",
-    Placeholder = "Type here...",
-    Default = "",
-    Callback = function(Text)
-        print("Text entered:", Text)
-    end
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Images</div>
-                <div class="card-content">
-                    Display images with <code>Tab:CreateImage()</code>.
-                    <pre>MainTab:CreateImage({
-    Image = "rbxassetid://18820555586",
-    Size = UDim2.new(0, 200, 0, 150)
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Videos</div>
-                <div class="card-content">
-                    Display videos with playback controls using <code>Tab:CreateVideo()</code>.
-                    <pre>MainTab:CreateVideo({
-    Video = "rbxassetid://0",
-    Size = UDim2.new(0, 423, 0, 250)
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Notifications</div>
-                <div class="card-content">
-                    Show notifications with <code>Window:CreateNotification()</code>.
-                    <pre>Window:CreateNotification({
-    Title = "Success",
-    Description = "Action completed!",
-    Duration = 3
-})</pre>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Settings Panel</div>
-                <div class="card-content">
-                    The UI includes a built-in settings panel with toggleable options:
-                    <ul style="margin-top: 10px; padding-left: 20px;">
-                        <li>Minimizing Animation</li>
-                        <li>Smooth Close</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="usage-section">
-            <h3>Installation</h3>
-            <pre>local SlimTrix = loadstring(game:HttpGet("https://raw.githubusercontent.com/SlimTrix1/SlimTrixUI-Library/refs/heads/main/SlimTrix-Development-UI-Library"))()</pre>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Complete Example Script</div>
-            <div class="card-content">
-                <pre>local SlimTrix = loadstring(game:HttpGet("https://raw.githubusercontent.com/SlimTrix1/SlimTrixUI-Library/refs/heads/main/SlimTrix-Development-UI-Library"))()
-
-local Window = SlimTrix:CreateWindow({
-    Name = "SlimTrix UI Example",
-    Icon = "rbxassetid://18820555586",
-    AccentColor3 = Color3.fromRGB(255, 0, 0)
-})
-
-local HomeTab = Window:CreateTab({
-    Name = "Home",
-    Icon = "rbxassetid://3926305904"
-})
-
-local MainTab = Window:CreateTab({
-    Name = "Main",
-    Icon = "rbxassetid://7733800044"
-})
-
-local SettingsTab = Window:CreateTab({
-    Name = "Settings", 
-    Icon = "rbxassetid://3926307971"
-})
-
-local VisualsTab = Window:CreateTab({
-    Name = "Visuals",
-    Icon = "rbxassetid://3926305904"
-})
-
-local player = game.Players.LocalPlayer
-local userId = player.UserId
-local thumbType = Enum.ThumbnailType.HeadShot
-local thumbSize = Enum.ThumbnailSize.Size420x420
-local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
-
-HomeTab:CreateText({
-    Text = "User Information",
-    TextSize = 22,
-    TextColor = Color3.fromRGB(220, 220, 620)
-})
-
-HomeTab:CreateImage({
-    Image = content,
-    Size = UDim2.new(0, 150, 0, 150)
-})
-
-HomeTab:CreateLabel({
-    Text = "Username: " .. player.Name,
-    TextSize = 16,
-    TextColor = Color3.fromRGB(180, 180, 180)
-})
-
-HomeTab:CreateLabel({
-    Text = "User ID: " .. userId,
-    TextSize = 16,
-    TextColor = Color3.fromRGB(180, 180, 180)
-})
-
-HomeTab:CreateLabel({
-    Text = "Account Age: " .. player.AccountAge .. " days",
-    TextSize = 16,
-    TextColor = Color3.fromRGB(180, 180, 180)
-})
-
-HomeTab:CreateText({
-    Text = "IP Information",
-    TextSize = 20,
-    TextColor = Color3.fromRGB(220, 220, 220)
-})
-
-local ipLabels = {}
-
-local function fetchIPInfo()
-    local success, result = pcall(function()
-        return game:HttpGet("https://ipwho.is/")
-    end)
-    
-    if success then
-        local data = game:GetService("HttpService"):JSONDecode(result)
-        return data
-    end
-    return nil
-end
-
-spawn(function()
-    local ipData = fetchIPInfo()
-    if ipData then
-        ipLabels.ip = HomeTab:CreateLabel({
-            Text = "IP: " .. (ipData.ip or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.country = HomeTab:CreateLabel({
-            Text = "Country: " .. (ipData.country or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.countryCode = HomeTab:CreateLabel({
-            Text = "Country Code: " .. (ipData.country_code or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.region = HomeTab:CreateLabel({
-            Text = "Region: " .. (ipData.region or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.city = HomeTab:CreateLabel({
-            Text = "City: " .. (ipData.city or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.isp = HomeTab:CreateLabel({
-            Text = "ISP: " .. (ipData.connection.isp or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        ipLabels.timezone = HomeTab:CreateLabel({
-            Text = "Timezone: " .. (ipData.timezone.id or "Unknown"),
-            TextSize = 14,
-            TextColor = Color3.fromRGB(180, 180, 180)
-        })
-        
-        Window:CreateNotification({
-            Title = "IP Info Loaded",
-            Description = "IP information fetched successfully",
-            Duration = 3
-        })
-    else
-        HomeTab:CreateLabel({
-            Text = "Failed to load IP information",
-            TextSize = 14,
-            TextColor = Color3.fromRGB(255, 100, 100)
-        })
-        Window:CreateNotification({
-            Title = "Error",
-            Description = "Failed to load IP information",
-            Duration = 3
-        })
-    end
-end)
-
-MainTab:CreateText({
-    Text = "Welcome to SlimTrix UI Example!",
-    TextSize = 18,
-    TextColor = Color3.fromRGB(220, 220, 220)
-})
-
-MainTab:CreateLabel({
-    Text = "This is a label with copy functionality",
-    TextSize = 16,
-    TextColor = Color3.fromRGB(180, 180, 180)
-})
-
-MainTab:CreateButton({
-    Text = "Click Me!",
-    Callback = function()
-        Window:CreateNotification({
-            Title = "Button Clicked",
-            Description = "You clicked the example button!",
-            Duration = 3
-        })
-    end
-})
-
-local ToggleExample = MainTab:CreateToggle({
-    Text = "Enable Feature",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            Window:CreateNotification({
-                Title = "Feature Enabled",
-                Description = "The feature has been turned on",
-                Duration = 2
-            })
-        else
-            Window:CreateNotification({
-                Title = "Feature Disabled", 
-                Description = "The feature has been turned off",
-                Duration = 2
-            })
-        end
-    end
-})
-
-local SliderExample = MainTab:CreateSlider({
-    Text = "Volume Control",
-    Minimum = 0,
-    Maximum = 100,
-    Default = 50,
-    Callback = function(Value) end
-})
-
-MainTab:CreateDropdown({
-    Text = "Select Weapon",
-    Options = {"Sword", "Axe", "Bow", "Staff", "Dagger"},
-    Default = "Sword",
-    Callback = function(Selected)
-        Window:CreateNotification({
-            Title = "Weapon Selected",
-            Description = "Equipped: " .. Selected,
-            Duration = 2
-        })
-    end
-})
-
-MainTab:CreatePlayerSelector({
-    Text = "Select Target",
-    Callback = function(SelectedPlayer)
-        if SelectedPlayer then
-            Window:CreateNotification({
-                Title = "Player Selected",
-                Description = "Target: " .. SelectedPlayer.Name,
-                Duration = 3
-            })
-        end
-    end
-})
-
-MainTab:CreateColorPicker({
-    Text = "UI Color",
-    Default = Color3.fromRGB(255, 0, 0),
-    Callback = function(SelectedColor) end
-})
-
-MainTab:CreateBind({
-    Text = "Toggle Menu",
-    Default = Enum.KeyCode.RightControl,
-    Hold = false,
-    CallBack = function()
-        Window:CreateNotification({
-            Title = "Menu Toggle",
-            Description = "Press RightShift to show/hide",
-            Duration = 2
-        })
-    end
-})
-
-local TextBoxExample = MainTab:CreateBox({
-    Text = "Player Name",
-    Placeholder = "Enter username...",
-    Default = "",
-    Callback = function(Text)
-        if Text ~= "" then
-            Window:CreateNotification({
-                Title = "Name Entered",
-                Description = "Hello, " .. Text .. "!",
-                Duration = 3
-            })
-        end
-    end
-})
-
-local VideoExample = VisualsTab:CreateVideo({
-    Video = "rbxassetid://0",
-    Size = UDim2.new(0, 423, 0, 250)
-})
-
-local ImageExample = VisualsTab:CreateImage({
-    Image = "rbxassetid://18820555586",
-    Size = UDim2.new(0, 423, 0, 200)
-})
-
-SettingsTab:CreateText({
-    Text = "Configuration Settings",
-    TextSize = 20,
-    TextColor = Color3.fromRGB(220, 220, 220)
-})
-
-SettingsTab:CreateToggle({
-    Text = "Auto-Farm",
-    Default = false,
-    Callback = function(Value) end
-})
-
-SettingsTab:CreateSlider({
-    Text = "Walk Speed",
-    Minimum = 16,
-    Maximum = 100,
-    Default = 16,
-    Callback = function(Value) end
-})
-
-SettingsTab:CreateDropdown({
-    Text = "Game Mode",
-    Options = {"Normal", "Hard", "Expert", "Nightmare"},
-    Default = "Normal",
-    Callback = function(Selected) end
-})
-
-VisualsTab:CreateText({
-    Text = "Visual Customization",
-    TextSize = 20,
-    TextColor = Color3.fromRGB(220, 220, 220)
-})
-
-VisualsTab:CreateToggle({
-    Text = "ESP Enabled",
-    Default = true,
-    Callback = function(Value) end
-})
-
-VisualsTab:CreateColorPicker({
-    Text = "ESP Color",
-    Default = Color3.fromRGB(255, 0, 0),
-    Callback = function(SelectedColor) end
-})
-
-VisualsTab:CreateBind({
-    Text = "ESP Toggle",
-    Default = Enum.KeyCode.F1,
-    Hold = false,
-    CallBack = function() end
-})
-
-wait(2)
-Window:CreateNotification({
-    Title = "Script Loaded",
-    Description = "SlimTrix UI Example is ready!",
-    Duration = 5
-})</pre>
-            </div>
-        </div>
-
-        <div class="footer">
-            Made By SlimTrix | Real Name : Aden Arias
-        </div>
-    </div>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e3c1c9af36de41759418005494a48906","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
-</html>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #191927, #252540);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a4a;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, #ff4a4a, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(255, 74, 74, 0.3);
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #b0b0d0;
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: linear-gradient(145deg, #1e1e2e, #252538);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid #2d2d4a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    font-size: 1.4rem;
+    color: #ff4a4a;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2d2d4a;
+    font-weight: 600;
+}
+
+.card-content {
+    line-height: 1.6;
+    color: #c0c0e0;
+}
+
+.card-content pre {
+    background: #0f0f1a;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 10px;
+    border: 1px solid #2a2a4a;
+    font-size: 0.9rem;
+}
+
+.footer {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #191927, #252540);
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a4a;
+    color: #b0b0d0;
+    font-size: 0.95rem;
+}
+
+code {
+    background: #2a2a4a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #8bc34a;
+}
+
+.highlight {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.feature-badge {
+    background: #2a2a4a;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #8bc34a;
+    border: 1px solid #3a3a5a;
+}
+
+.usage-section {
+    background: #1e1e2e;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #ff4a4a;
+}
+
+.usage-section h3 {
+    color: #ff4a4a;
+    margin-bottom: 10px;
+}
+
+.version-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff4a4a;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
